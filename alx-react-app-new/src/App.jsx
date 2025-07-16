@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import WelcomeMessage from "./components/WelcomeMessage";
 import UserProfile from "./components/UserProfile";
 import { useState } from 'react'
+import Counter from "./components/Counter";
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -13,14 +14,17 @@ function App() {
 
   return (
     <>
+      <WelcomeMessage />
+      <p>This is a simple React application using Vite.</p>
+      <p>Click the button below to increment the count:</p>
       <Header />
       <h1>Welcome to the ALX React App!</h1>
       <MainContent />
       <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+      <Counter />
+      <p>Feel free to explore the components and modify them as you like!</p>
+      {/* Additional components */}
       <Footer />
-      <WelcomeMessage />
-      <p>This is a simple React application using Vite.</p>
-      <p>Click the button below to increment the count:</p>
       
       <div>
         <a href="https://vite.dev" target="_blank">
