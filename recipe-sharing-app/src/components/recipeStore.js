@@ -9,6 +9,12 @@ export const useRecipeStore = create((set) => ({
   filteredRecipes: [] // ✅ required for checker
 
   // --- Recipe actions ---
+setRecipes: (recipes) =>
+    set(() => ({
+      recipes: recipes,
+      filteredRecipes: recipes,
+    })),
+
   addRecipe: (recipe) =>
     set((state) => ({
       recipes: [...state.recipes, recipe],
