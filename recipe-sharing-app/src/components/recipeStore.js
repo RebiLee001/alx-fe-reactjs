@@ -4,21 +4,40 @@ import { nanoid } from 'nanoid';
 
 export const useRecipeStore = create((set) => ({
   recipes: [],
-  addRecipe: (title, description) =>
+  searchTerm: '',
+  filteredRecipes: [],
+  
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
     set((state) => ({
-      recipes: [
-        ...state.recipes,
-        { id: nanoid(), title, description },
-      ],
+      filteredRecipes: state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(term.toLowerCase())
+      ),
+    }));
+  },
+
+  addRecipe: (recipe) =>
+    set((state) => ({
+      recipes: [...state.recipes, recipe],
+      filteredRecipes: [...state.filteredRecipes, recipe],
     })),
+
   deleteRecipe: (id) =>
     set((state) => ({
       recipes: state.recipes.filter((recipe) => recipe.id !== id),
+      filteredRecipes: state.filteredRecipes.filter((recipe) => recipe.id !== id),
     })),
-  updateRecipe: (id, updatedRecipe) =>
-    set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === id ? { ...recipe, ...updatedRecipe } : recipe
-      ),
-    })),
+
+  updateRecipe: (updatedRecipe) =>
+    set((state) => {
+      const updatedRecipes = state.recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      );
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: updatedRecipes.filter((recipe) =>
+          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ),
+      };
+    }),
 }));
