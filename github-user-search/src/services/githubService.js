@@ -1,15 +1,14 @@
 // src/services/githubService.js
 import axios from "axios";
 
-const BASE_URL =
-  import.meta.env.VITE_APP_GITHUB_API || "https://api.github.com";
+const BASE_URL = "https://api.github.com";
 
 // ✅ fetch a single user by username
 export const fetchUserData = async ({ query, location, minRepos }) => {
   try {
     let searchQuery = query;
     if (location) searchQuery += `+location:${location}`;
-    if (minRepos) searchQuery += `+repos:${minRepos}`;
+    if (minRepos) searchQuery += `+repos:>=${minRepos}`;
 
     const response = await axios.get(
       `${BASE_URL}/search/users?q=${searchQuery}`
