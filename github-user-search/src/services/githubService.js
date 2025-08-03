@@ -1,24 +1,21 @@
 // src/services/githubService.js
 import axios from "axios";
 
-const API_BASE_URL = "https://api.github.com/users";
+const BASE_URL =
+  import.meta.env.VITE_APP_GITHUB_API || "https://api.github.com";
 
 export const fetchUserData = async ({ query, location, minRepos }) => {
   try {
-    let q = query;
-    if (location) {
-      q += `+location:${location}`;
-    }
-    if (minRepos) {
-      q += `+repos:>=${minRepos}`;
-    }
+    let searchQuery = query;
+    if (location) searchQuery += `+location:${location}`;
+    if (minRepos) searchQuery += `+repos:${minRepos}`;
 
     const response = await axios.get(
-      `https://api.github.com/search/users?q=${q}`
+      `${BASE_URL}/search/users?q=${searchQuery}`
     );
-    return response.data.item;
+    return response.data.items;
   } catch (error) {
     console.error("GitHub API error:", error);
-    throw error;
+    throw new Error("Error fetching data");
   }
 };
