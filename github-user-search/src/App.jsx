@@ -1,15 +1,15 @@
 import { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import UserCard from "./components/UserCard";
-import { searchUsers } from "./services/githubService";
 import Search from "./components/Search";
+import { fetchUserData } from "./services/githubService";
 
 function App() {
   const [user, setUser] = useState(null);
 
   const handleSearch = async (username) => {
     try {
-      const data = await searchUsers(username);
+      const data = await fetchUserData(username);
       setUser(data);
     // eslint-disable-next-line no-unused-vars
     } catch (error) {
