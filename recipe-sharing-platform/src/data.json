@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Bolognese",
+    "summary": "A classic Italian pasta dish with rich tomato and beef sauce.",
+    "ingredients": ["Spaghetti", "Tomato Sauce", "Ground Beef", "Onion", "Garlic"],
+    "instructions": "Cook pasta, prepare sauce, mix together.",
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "id": 2,
+    "title": "Chicken Curry",
+    "summary": "A flavorful curry made with chicken, spices, and creamy coconut milk.",
+    "ingredients": ["Chicken", "Curry Powder", "Coconut Milk", "Onion", "Garlic"],
+    "instructions": "Cook chicken, add spices, simmer with coconut milk.",
+    "image": "https://via.placeholder.com/150"
+  }
+]
