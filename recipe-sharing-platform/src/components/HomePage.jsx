@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import recipesData from "../data.json"; // adjust path if needed
 
-export default function HomePage({ recipes, onSelect }) {
+export default function HomePage({ onSelect }) {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    // Load recipes from local JSON
+    setRecipes(recipesData);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       {recipes.map((recipe) => (
@@ -10,7 +18,8 @@ export default function HomePage({ recipes, onSelect }) {
           onClick={() => onSelect(recipe)}
         >
           <h3 className="text-xl font-bold mb-2">{recipe.title}</h3>
-          <p className="text-sm text-gray-600">{recipe.ingredients.join(", ")}</p>
+          {/* show summary instead of full ingredients list */}
+          <p className="text-sm text-gray-600">{recipe.summary}</p>
         </div>
       ))}
     </div>
