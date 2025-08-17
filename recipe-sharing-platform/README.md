@@ -1,4 +1,4 @@
-# Recipe Sharing Platform
+README.md # Recipe Sharing Platform
 
 This is a React + Tailwind CSS project for a Recipe Sharing Platform.  
 
