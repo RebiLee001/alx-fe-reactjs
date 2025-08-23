@@ -18,8 +18,10 @@ export default function PostsComponent() {
   } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    staleTime: 30000, // 30s - keeps cache fresh
-    cacheTime: 60000, // 1min - keeps data in memory
+    staleTime: 30000,          // cache stays fresh for 30s
+    cacheTime: 60000,          // cache kept in memory for 1 min
+    refetchOnWindowFocus: false, // 👈 stops refetching when switching tabs
+    keepPreviousData: true,      // 👈 keeps old data while fetching new
   });
 
   if (isLoading) return <p className="text-blue-500">Loading posts...</p>;
