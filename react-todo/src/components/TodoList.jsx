@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function TodoList() {
   const [todos, setTodos] = useState([
@@ -9,8 +9,17 @@ export default function TodoList() {
 
   const addTodo = (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
+
+    // ✅ Prevent empty or whitespace-only todos
+    if (input.trim() === "") return;
+
+    const newTodo = {
+      id: Date.now(),
+      text: input,
+      completed: false,
+    };
+
+    setTodos([...todos, newTodo]);
     setInput("");
   };
 
@@ -32,26 +41,25 @@ export default function TodoList() {
       <form onSubmit={addTodo}>
         <input
           type="text"
+          placeholder="Add a new todo"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Add a new todo"
         />
         <button type="submit">Add</button>
       </form>
       <ul>
         {todos.map((todo) => (
-          <li
-            key={todo.id}
-            onClick={() => toggleTodo(todo.id)}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-              cursor: "pointer",
-            }}
-          >
-            {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
-              Delete
-            </button>
+          <li key={todo.id}>
+            <span
+              onClick={() => toggleTodo(todo.id)}
+              style={{
+                cursor: "pointer",
+                textDecoration: todo.completed ? "line-through" : "none",
+              }}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
