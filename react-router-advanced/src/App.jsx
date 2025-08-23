@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
 
         {/* Dynamic route for blog posts */}
-        <Route path="/post/:id" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
 
         {/* Protected route for Profile */}
         <Route
@@ -27,7 +27,7 @@ function App() {
         {/* Login page */}
         <Route path="/login" element={<Login />} />
 
-        {/* Fallback */}
+        {/* Fallback for unknown paths */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
